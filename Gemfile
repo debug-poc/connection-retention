@@ -2,13 +2,25 @@ source "https://rubygems.org"
 
 # Use main development branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
-gem "pg", "~> 1.1"
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
+# Use postgresql as the database for Active Record
+gem "sqlite3"
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+# gem "puma", ">= 5.0"
+# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+gem "jsbundling-rails"
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# gem "turbo-rails"
+gem "turbo-rails", git: "https://github.com/hotwired/turbo-rails.git", branch: "main"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
+gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+# Use Redis adapter to run Action Cable in production
+gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -21,9 +33,6 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -44,5 +53,17 @@ group :development do
   gem "web-console"
 end
 
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+end
 
-gem "falcon", "~> 0.47.6"
+gem "bcrypt", "~> 3.1"
+
+gem "falcon", "~> 0.47.1"
+gem "async-websocket", "~> 0.26.1"
+
+gem "ruby-openai", require: "openai"
+
+gem "puma"

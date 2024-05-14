@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/hotwired/turbo-rails.git
+  revision: e376852bfb273f69f4ebb54cf516b99fcbaa7acb
+  branch: main
+  specs:
+    turbo-rails (2.0.5)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+
+GIT
   remote: https://github.com/rails/rails.git
   revision: 2e7dc14943d285626a9e12ad0d1750d3609185be
   branch: main
@@ -97,6 +107,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.6)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     async (2.11.0)
       console (~> 1.25, >= 1.25.2)
@@ -121,8 +133,12 @@ GEM
     async-service (0.12.0)
       async
       async-container (~> 0.16)
+    async-websocket (0.26.1)
+      async-http (~> 0.54)
+      protocol-rack (~> 0.5)
+      protocol-websocket (~> 0.11)
     base64 (0.2.0)
-    bcrypt_pbkdf (1.1.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.3)
@@ -130,6 +146,15 @@ GEM
     brakeman (6.1.2)
       racc
     builder (3.2.4)
+    capybara (3.40.0)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.11)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     console (1.25.2)
@@ -137,14 +162,15 @@ GEM
       fiber-local (~> 1.1)
       json
     crass (1.0.6)
+    cssbundling-rails (1.4.0)
+      railties (>= 6.0.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    dotenv (2.8.1)
     drb (2.2.1)
-    ed25519 (1.3.0)
     erubi (1.12.0)
+    event_stream_parser (1.0.0)
     falcon (0.47.6)
       async
       async-container (~> 0.18)
@@ -157,6 +183,12 @@ GEM
       process-metrics (~> 0.2.0)
       protocol-rack (~> 0.5)
       samovar (~> 2.3)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.1.0)
+      net-http
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
       fiber-storage
@@ -175,18 +207,9 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsbundling-rails (1.3.0)
+      railties (>= 6.0.0)
     json (2.7.2)
-    kamal (1.5.2)
-      activesupport (>= 7.0)
-      base64 (~> 0.2)
-      bcrypt_pbkdf (~> 1.0)
-      concurrent-ruby (~> 1.2)
-      dotenv (~> 2.8)
-      ed25519 (~> 1.2)
-      net-ssh (~> 7.0)
-      sshkit (~> 1.21)
-      thor (~> 1.2)
-      zeitwerk (~> 2.5)
     language_server-protocol (3.17.0.3)
     localhost (1.3.1)
     loofah (2.22.0)
@@ -199,10 +222,13 @@ GEM
       net-smtp
     mapping (1.1.1)
     marcel (1.0.4)
+    matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.21.2)
     msgpack (1.7.2)
-    mutex_m (0.2.0)
+    multipart-post (2.4.1)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.11)
       date
       net-protocol
@@ -210,13 +236,8 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-scp (4.0.0)
-      net-ssh (>= 2.6.5, < 8.0.0)
-    net-sftp (4.0.0)
-      net-ssh (>= 5.0.0, < 8.0.0)
     net-smtp (0.5.0)
       net-protocol
-    net-ssh (7.2.3)
     nio4r (2.7.3)
     nokogiri (1.16.5-aarch64-linux)
       racc (~> 1.4)
@@ -229,10 +250,14 @@ GEM
     parser (3.3.1.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.6)
     process-metrics (0.2.1)
       console (~> 1.8)
       samovar (~> 2.1)
+    propshaft (0.8.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     protocol-hpack (1.4.3)
     protocol-http (0.26.5)
     protocol-http1 (0.19.1)
@@ -243,8 +268,11 @@ GEM
     protocol-rack (0.5.1)
       protocol-http (~> 0.23)
       rack (>= 1.0)
+    protocol-websocket (0.12.1)
+      protocol-http (~> 0.2)
     psych (5.1.2)
       stringio
+    public_suffix (5.0.5)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.7.3)
@@ -267,6 +295,10 @@ GEM
     rake (13.2.1)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
+    redis (5.2.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.22.1)
+      connection_pool
     regexp_parser (2.9.1)
     reline (0.5.6)
       io-console (~> 0.5)
@@ -300,19 +332,25 @@ GEM
       rubocop-minitest
       rubocop-performance
       rubocop-rails
+    ruby-openai (7.0.1)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
+    rubyzip (2.3.2)
     samovar (2.3.0)
       console (~> 1.0)
       mapping (~> 1.0)
+    selenium-webdriver (4.20.1)
+      base64 (~> 0.2)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     sqlite3 (2.0.1-aarch64-linux-gnu)
     sqlite3 (2.0.1-arm64-darwin)
     sqlite3 (2.0.1-x86_64-linux-gnu)
-    sshkit (1.22.2)
-      base64
-      mutex_m
-      net-scp (>= 1.1.2)
-      net-sftp (>= 2.1.2)
-      net-ssh (>= 2.8.0)
+    stimulus-rails (1.3.3)
+      railties (>= 6.0.0)
     stringio (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
@@ -321,6 +359,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     useragent (0.16.10)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -328,9 +367,12 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.8.1)
+    websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
     zeitwerk (2.6.13)
 
 PLATFORMS
@@ -339,17 +381,26 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  async-websocket (~> 0.26.1)
+  bcrypt (~> 3.1)
   bootsnap
   brakeman
+  capybara
+  cssbundling-rails
   debug
-  falcon (~> 0.47.6)
+  falcon (~> 0.47.1)
   jbuilder
-  kamal
-  pg (~> 1.1)
-  puma (>= 5.0)
+  jsbundling-rails
+  propshaft
+  puma
   rails!
+  redis (>= 4.0.1)
   rubocop-rails-omakase
-  sqlite3 (>= 1.4)
+  ruby-openai
+  selenium-webdriver
+  sqlite3
+  stimulus-rails
+  turbo-rails!
   tzinfo-data
   web-console
 

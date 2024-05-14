@@ -1,11 +1,17 @@
 class SseController < ApplicationController
-  before_action :signin_user
+  before_action :authenticate_user!, only: :index
 
   EVENT_STREAM_HEADERS = {
     "content-type" => "text/event-stream",
     "cache-control" => "no-cache",
     "last-modified" => Time.now.httpdate
   }
+
+  def signin
+    user = User.order(Arel.sql("RANDOM()")).first
+    sign_in(user)
+    redirect_to root_path
+  end
 
   def index
     user = Current.user
@@ -22,12 +28,5 @@ class SseController < ApplicationController
     end
 
     self.response = Rack::Response[200, EVENT_STREAM_HEADERS.dup, body]
-  end
-
-  private
-
-  def signin_user
-    user = User.order(Arel.sql("RANDOM()")).first
-    sign_in(user)
   end
 end

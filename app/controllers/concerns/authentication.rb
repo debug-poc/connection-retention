@@ -18,7 +18,7 @@ module Authentication
 
   def authenticate_user!
     if current_user.blank?
-      redirect_to new_session_path, alert: "You need to sign in to continue."
+      redirect_to "/signin", alert: "You need to sign in to continue."
     end
   end
 
